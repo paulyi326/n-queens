@@ -134,6 +134,28 @@ window.countNQueensSolutions = function(n) {
       }
       return board;
     };
+    /*
+      var dices = function(n) {
+
+        var results = [];
+        var helper = function(dice, arr) {
+          if (dice === 0) {
+            results.push(arr);
+          } else {
+            for (var i = 1; i <= n; i++) {
+              if (arr.indexOf(i) === -1) {
+              arr.push(i);
+              helper(dice - 1, arr.slice());
+              arr.pop();
+
+              }
+            }
+          }
+        }
+        helper(n, []);
+        return results;
+      }
+    */
 
     var countHelper = function(rows, array){
       if(rows === 0 ){
@@ -143,9 +165,11 @@ window.countNQueensSolutions = function(n) {
         }
       } else {
         for(var i = 0; i < n; i++){
-          array.push(i);
-          countHelper(rows-1, array.slice());
-          array.pop();
+          if(array.indexOf(i) === -1){
+            array.push(i);
+            countHelper(rows-1, array.slice());
+            array.pop();
+          }
         }
       }
     };
